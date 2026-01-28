@@ -1,6 +1,5 @@
 package com.supplychain.supply_chain_api.domain.entity;
 
-// IMPORTANTE: Importar o novo Enum com nome em português
 import com.supplychain.supply_chain_api.domain.enums.EntregaStatus;
 
 import jakarta.persistence.*;
