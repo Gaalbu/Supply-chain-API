@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  #O Db escolhido foi postgres
+  postgres-db:
+    image: postgres:15-alpine
+    container_name: logistics_db
+    environment:
+      POSTGRES_DB: logistics_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data  
+
+# Notific e mensageria (RabbitMQ)
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    container_name: logistics_mq
+    ports:
+      - "5672:5672"   # porta padrão
+      - "15672:15672" # interface visual
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+
+volumes:
+  pgdata:
+
+
+    
