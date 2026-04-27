@@ -100,6 +100,18 @@ docker-compose up -d
 
 ### 2. Rodar a API
 
+Se no Linux aparecer `bash: ./mvnw: Permissão negada`, rode primeiro:
+
+```bash
+chmod +x mvnw
+```
+
+Se ainda assim preferir, você também pode executar com:
+
+```bash
+bash ./mvnw spring-boot:run
+```
+
 ```bash
 ./mvnw spring-boot:run
 ```
@@ -190,6 +202,12 @@ curl -X PATCH http://localhost:8080/api/pacotes/PKG001/status \
 ## Testes
 
 O projeto inclui a classe base de testes gerada pelo Spring Boot. Para executar os testes:
+
+Se ocorrer o mesmo problema de permissão no Linux, use `chmod +x mvnw` uma vez ou execute:
+
+```bash
+bash ./mvnw test
+```
 
 ```bash
 ./mvnw test
