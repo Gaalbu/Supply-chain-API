@@ -2,7 +2,7 @@
 
 API backend em Spring Boot para gerenciamento de pacotes em um fluxo de supply chain. O projeto persiste os dados em PostgreSQL, publica eventos no RabbitMQ quando o status de um pacote muda e expõe endpoints REST para criação e atualização de status.
 
-> **Importante:** este backend deve ser utilizado em conjunto com o front-end do projeto: [Supply-chain-web](https://github.com/Gaalbu/Supply-chain-web)
+> **Importante:** este backend deve ser utilizado em conjunto com o front-end do projeto, disponível em [`../web`](../web) neste mesmo monorepo.
 
 ## Visão geral
 
