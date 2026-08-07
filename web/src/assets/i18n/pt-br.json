@@ -1,0 +1,23 @@
+{
+	"APP": {
+		"TITLE": "Cadeia de Suprimentos Web",
+		"SWITCH_LANG": "Idioma: {{lang}}"
+	},
+	"RASTREIO": {
+		"TITLE": "Rastreio de Pacotes",
+		"SUBTITLE": "Acompanhe sua entrega em tempo real.",
+		"PLACEHOLDER": "Digite o código (ex: BR123)...",
+		"SEARCH": "Buscar",
+		"SEARCHING": "Buscando...",
+		"CODE": "Código",
+		"RECIPIENT": "Destinatário",
+		"LAST_UPDATE": "Última atualização"
+	},
+	"STATUS": {
+		"PREPARACAO": "Em Preparação",
+		"EM_TRANSITO": "Em Trânsito",
+		"SAIU_PARA_ENTREGA": "Saiu para Entrega",
+		"ENTREGUE": "Entregue",
+		"DEVOLVIDO": "Devolvido"
+	}
+}

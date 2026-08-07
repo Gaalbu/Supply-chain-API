@@ -1,0 +1,23 @@
+{
+	"APP": {
+		"TITLE": "Supply Chain Web",
+		"SWITCH_LANG": "Language: {{lang}}"
+	},
+	"RASTREIO": {
+		"TITLE": "Package Tracking",
+		"SUBTITLE": "Track your delivery in real time.",
+		"PLACEHOLDER": "Enter the code (e.g., BR123)...",
+		"SEARCH": "Search",
+		"SEARCHING": "Searching...",
+		"CODE": "Code",
+		"RECIPIENT": "Recipient",
+		"LAST_UPDATE": "Last update"
+	},
+	"STATUS": {
+		"PREPARACAO": "Preparing",
+		"EM_TRANSITO": "In Transit",
+		"SAIU_PARA_ENTREGA": "Out for Delivery",
+		"ENTREGUE": "Delivered",
+		"DEVOLVIDO": "Returned"
+	}
+}

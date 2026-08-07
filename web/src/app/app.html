@@ -1,0 +1,14 @@
+<header class="w-full bg-white border-b border-gray-200">
+	<div class="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
+		<h1 class="text-lg font-bold text-gray-900">{{ 'APP.TITLE' | translate }}</h1>
+		<button
+			type="button"
+			class="text-sm font-semibold text-blue-700 border border-blue-200 px-3 py-1 rounded-full hover:bg-blue-50 transition-colors"
+			(click)="toggleLang()"
+		>
+			{{ 'APP.SWITCH_LANG' | translate:{ lang: currentLang() === 'pt-br' ? 'PT-BR' : 'EN' } }}
+		</button>
+	</div>
+</header>
+
+<router-outlet></router-outlet>
