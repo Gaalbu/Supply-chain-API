@@ -10,7 +10,8 @@
       type="text" 
       [placeholder]="'RASTREIO.PLACEHOLDER' | translate" 
       class="flex-1 px-4 py-2 outline-none rounded-full text-gray-700 uppercase"
-      [(ngModel)]="codigoBusca"
+      [ngModel]="codigoBusca()"
+      (ngModelChange)="codigoBusca.set($event)"
     >
     <button 
       (click)="buscarPacote()"
@@ -20,22 +21,31 @@
     </button>
   </div>
 
-  <div *ngIf="resultado()" class="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+  <p *ngIf="naoEncontrado()" class="mb-6 text-amber-700" role="status">
+    Nenhum pacote foi encontrado para esse código.
+  </p>
+
+  <div *ngIf="erro()" class="mb-6 text-center text-red-700" role="alert">
+    Não foi possível consultar o pacote. Tente novamente.
+    <button type="button" class="ml-2 underline" (click)="buscarPacote()">Repetir</button>
+  </div>
+
+  <div *ngIf="resultado() as pacote" class="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow-sm p-6">
     <div class="flex justify-between items-center mb-4">
-      <span class="text-sm text-gray-500 font-medium">{{ 'RASTREIO.CODE' | translate }}: {{ resultado().codigo }}</span>
+      <span class="text-sm text-gray-500 font-medium">{{ 'RASTREIO.CODE' | translate }}: {{ pacote.codigo }}</span>
       <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">
-        {{ ('STATUS.' + resultado().status) | translate }}
+        {{ ('STATUS.' + pacote.status) | translate }}
       </span>
     </div>
     
     <div class="mb-2">
       <p class="text-sm text-gray-500">{{ 'RASTREIO.RECIPIENT' | translate }}:</p>
-      <p class="font-semibold text-gray-800">{{ resultado().destinatario }}</p>
+      <p class="font-semibold text-gray-800">{{ pacote.destinatario }}</p>
     </div>
 
     <div>
       <p class="text-sm text-gray-500">{{ 'RASTREIO.LAST_UPDATE' | translate }}:</p>
-      <p class="font-semibold text-gray-800">{{ resultado().dataAtualizacao | date:'dd/MM/yyyy HH:mm' }}</p>
+      <p class="font-semibold text-gray-800">{{ pacote.dataAtualizacao | date:'dd/MM/yyyy HH:mm' }}</p>
     </div>
   </div>
 
