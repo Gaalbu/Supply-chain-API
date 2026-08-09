@@ -1,3 +1,8 @@
 package com.supplychain.supply_chain_api.dto;
 
-public record AuthenticationDTO(String login, String password) {}
+import jakarta.validation.constraints.NotBlank;
+
+public record AuthenticationDTO(
+        @NotBlank String login,
+        @NotBlank String password
+) {}
