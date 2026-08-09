@@ -10,12 +10,25 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ServicoPacote {
     
     private final RepositorioPacote repositorio;
     private final RabbitTemplate rabbitTemplate;
+
+    @Transactional
+    public List<Pacote> listar() {
+        return repositorio.findAll();
+    }
+
+    @Transactional
+    public Pacote buscarPorCodigo(String codigoRastreio) {
+        return repositorio.findByCodigoRastreio(codigoRastreio)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Pacote não encontrado."));
+    }
 
     //Create
     @Transactional
@@ -33,8 +46,7 @@ public class ServicoPacote {
     @Transactional
     public void atualizarStatus(String codigoRastreio, EntregaStatus novoStatus){
         // Busca pacote no banco. Lança erro se não achar.
-        Pacote pacote = repositorio.findByCodigoRastreio(codigoRastreio)
-                            .orElseThrow(() -> new RuntimeException("Pacote não encontrado com o código: " + codigoRastreio));
+        Pacote pacote = buscarPorCodigo(codigoRastreio);
 
         if (EntregaStatus.ENTREGUE.equals(pacote.getStatus())) {
             throw new IllegalStateException("Pacote já foi entregue, portanto seu status não pode ser alterado.");
