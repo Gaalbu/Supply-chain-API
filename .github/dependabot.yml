@@ -22,6 +22,12 @@ updates:
     ignore:
       - dependency-name: typescript
         update-types: ["version-update:semver-major"]
+      - dependency-name: "@ngx-translate/core"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@ngx-translate/http-loader"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: tailwindcss
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: github-actions
     directory: /
