@@ -1,13 +1,14 @@
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
+import { environment } from '../../environments/environment';
 
 export interface Pacote {
-    id?: string;
+    id: number;
     codigo: string;
     destinatario: string;
     status: string;
-    dataAtualizacao: string;
+    dataAtualizacao: string | null;
 }
 
 @Injectable({
@@ -15,14 +16,17 @@ export interface Pacote {
 })
 export class PacoteService{
     private http = inject(HttpClient);
-    private apiUrl = 'http://localhost:8080/api/pacotes';
+    private readonly apiUrl = `${environment.apiUrl}/pacotes`;
 
     listarTodos(): Observable<Pacote[]> {
         return this.http.get<Pacote[]>(this.apiUrl);
     }
 
-    atualizarStatus(id: string, novoStatus: string): Observable<Pacote> {
-    return this.http.put<Pacote>(`${this.apiUrl}/${id}/status`, { status: novoStatus });
+    buscarPorCodigo(codigoRastreio: string): Observable<Pacote> {
+        return this.http.get<Pacote>(`${this.apiUrl}/${encodeURIComponent(codigoRastreio)}`);
+    }
+
+    atualizarStatus(codigoRastreio: string, novoStatus: string): Observable<void> {
+        return this.http.patch<void>(`${this.apiUrl}/${encodeURIComponent(codigoRastreio)}/status`, { novoStatus });
     }
 }
-

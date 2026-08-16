@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { Pacote, PacoteService } from '../../services/pacote.service';
 
 @Component({
   selector: 'app-rastreio',
@@ -10,25 +11,33 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './rastreio.scss',
 })
 export class Rastreio {
+  private readonly pacoteService = inject(PacoteService);
+
   codigoBusca = signal('');
   buscando = signal(false);
-  resultado = signal<any>(null);
+  resultado = signal<Pacote | null>(null);
+  naoEncontrado = signal(false);
+  erro = signal(false);
 
   buscarPacote() {
     if (this.codigoBusca().trim() === '') return;
     
+    const codigo = this.codigoBusca().trim();
     this.buscando.set(true);
     this.resultado.set(null);
-    
-    // Simula uma busca assíncrona
-    setTimeout(() => {
-      this.resultado.set({
-        codigo: this.codigoBusca(),
-        status: 'EM_TRANSITO',
-        destinatario: 'Test ando',
-        dataAtualizacao: new Date()
-      });
-      this.buscando.set(false);
-    }, 1000);
+    this.naoEncontrado.set(false);
+    this.erro.set(false);
+
+    this.pacoteService.buscarPorCodigo(codigo).subscribe({
+      next: (pacote) => {
+        this.resultado.set(pacote);
+        this.buscando.set(false);
+      },
+      error: (response) => {
+        this.naoEncontrado.set(response.status === 404);
+        this.erro.set(response.status !== 404);
+        this.buscando.set(false);
+      },
+    });
   }
 }
