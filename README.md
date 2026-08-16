@@ -2,7 +2,8 @@
 
 Monorepo para cadastro e rastreio de pacotes, com API Spring Boot e interface Angular. Os dados são persistidos no PostgreSQL e cada alteração de status publica um evento no RabbitMQ.
 
-> Estado atual: projeto funcional em desenvolvimento. O cadastro, a consulta e a alteração de status usam a API real. O consumidor RabbitMQ registra uma simulação de notificação; não existe integração com provedor de e-mail. Entrega confiável, retry, DLQ, idempotência do consumidor e trilha de auditoria persistida ainda não foram implementados.
+- [`api/`](./api): API REST em Spring Boot (Java 17, PostgreSQL, RabbitMQ). Veja [api/README.MD](./api/README.MD).
+- [`web/`](./web): Frontend em Angular (TypeScript, Tailwind, i18n PT-BR/EN-US). Veja [web/README.md](./web/README.md).
 
 ## Arquitetura
 
